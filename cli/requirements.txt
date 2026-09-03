@@ -1,7 +1,7 @@
 typer>=0.9,<1
 rich>=13.0
 questionary>=2.0,<3
-python-dotenv>=1.0
+python-dotenv>=1.2.3
 
 # Dev / test (install with: pip install -r requirements-dev.txt)
 # Kept separate so production installs stay slim.

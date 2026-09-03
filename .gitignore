@@ -80,4 +80,6 @@ tenants.json
 .github/agents/
 .github/hooks/
 .github/skills/
+.impeccable/
+PRODUCT.md
 skills-lock.json

@@ -30,8 +30,7 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
+        # Version comes from packageManager in the root package.json.
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -101,7 +100,9 @@ jobs:
             echo "→ bash -n $f"
             bash -n "$f"
           done
-          # shellcheck is now a hard gate — no `|| true`. SC2155 is excluded
+          # shellcheck is a hard gate — no `|| true`. SC2155 is excluded
           # because provision-client.sh intentionally combines declare+assign
-          # for readability of long var assignments.
-          shellcheck -e SC2155 deploy.sh scripts/*.sh packages/ops/*.sh
+          # for readability of long var assignments. Info-level findings
+          # (style suggestions, version-dependent false positives like
+          # trap-invoked functions) don't block CI.
+          shellcheck -S warning -e SC2155 deploy.sh scripts/*.sh packages/ops/*.sh

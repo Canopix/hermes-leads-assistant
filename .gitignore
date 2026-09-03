@@ -76,4 +76,8 @@ tenants.json
 .codegraph/
 .agents/
 .cursor/
+.codex/
+.github/agents/
+.github/hooks/
+.github/skills/
 skills-lock.json

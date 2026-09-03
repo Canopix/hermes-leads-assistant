@@ -42,6 +42,12 @@ jobs:
         run: pnpm install --frozen-lockfile
         working-directory: .
 
+      - name: Build shared package
+        # @hermes-leads/shared resolves from dist/ (tsup output, gitignored),
+        # so it must be built before type-check/test/build consume it.
+        run: pnpm --filter @hermes-leads/shared build
+        working-directory: .
+
       - name: Type-check
         run: pnpm type-check
 

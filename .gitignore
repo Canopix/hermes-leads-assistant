@@ -1,0 +1,79 @@
+# ----- Secrets & env -----
+# Never commit real env files. Only *.example / *.EXAMPLE are tracked.
+.env
+.env.*
+!.env.EXAMPLE
+!.env.example
+**/.env
+**/.env.local
+**/.env.*.local
+apps/portal/.auth/
+
+# ----- Hermes runtime (per-profile, lives outside the repo but be safe) -----
+.hermes/
+**/.hermes/
+
+# ----- Node / pnpm -----
+node_modules/
+.pnpm-store/
+
+# ----- Next.js -----
+.next/
+out/
+build/
+dist/
+!packages/hermes-dist/dist
+*.tsbuildinfo
+next-env.d.ts
+*.tsbuildinfo
+
+# ----- Turbo -----
+.turbo/
+
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ----- Logs -----
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ----- OS / editor -----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ----- Build artifacts & coverage -----
+coverage/
+*.lcov
+.nyc_output/
+
+# ----- Temp -----
+*.tmp
+*.bak
+/tmp/
+
+# ----- Local tenant registry (the real one moves into the portal DB) -----
+# tenants.json is the real runtime registry and may contain customer info;
+# only the sanitized example should be tracked.
+tenants.json
+
+# ----- Local agent / tooling state (not part of the product) -----
+.codegraph/
+.agents/
+.cursor/
+skills-lock.json

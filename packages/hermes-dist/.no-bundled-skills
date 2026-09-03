@@ -1,0 +1,3 @@
+This profile opted out of Hermes bundled-skill seeding.
+Lead AI Assistant bots use RAG (knowledge/) only — not the default skill catalog.
+Delete this file only if you intentionally want hermes update to sync bundled skills.

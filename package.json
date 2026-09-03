@@ -1,0 +1,24 @@
+{
+  "name": "hermes-leads-assistant",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "dev:portal": "turbo run dev --filter=portal",
+    "dev:docs": "turbo run dev --filter=docs",
+    "dev:web": "turbo run dev --filter=web",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "test": "turbo run test",
+    "test:cli": "cd cli && venv/bin/pytest tests/ -v",
+    "validate:hermes-dist": "bash packages/ops/validate-dist.sh",
+    "setup:client": "bash packages/ops/setup-wizard.sh",
+    "audit:deps": "bash scripts/audit-deps.sh"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.0.0"
+  },
+  "packageManager": "pnpm@9.0.0"
+}

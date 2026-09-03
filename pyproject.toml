@@ -1,0 +1,55 @@
+# Ruff config for the entire monorepo (CLI + Hermes plugins + tests).
+# Applies to every *.py under cli/, packages/hermes-dist/, tests/.
+# Not enforced on the Hermes core venv — only on code we author here.
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = [
+  "node_modules",
+  ".next",
+  ".turbo",
+  ".codegraph",
+  "cli/venv",
+  "packages/hermes-dist/dist",
+]
+
+[tool.ruff.lint]
+# Default lint set + a few useful categories. Conservative — we don't want
+# to flood the codebase with stylistic rewrites on the first pass.
+select = [
+  "E",    # pycodestyle errors
+  "F",    # pyflakes (unused vars, undefined names)
+  "W",    # pycodestyle warnings
+  "I",    # isort
+  "B",    # flake8-bugbear (likely-bugs)
+  "UP",   # pyupgrade
+  "SIM",  # flake8-simplify
+]
+ignore = [
+  "E501",  # line too long — handled by formatter, not a bug
+  "B008",  # function call in default argument — Typer/Click idiom
+  "SIM108", # ternary instead of if/else — readability over brevity
+  "UP007", # `Optional[X]` vs `X | None` — keep Optional for compat
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests can use asserts, fixtures, and star imports freely.
+"tests/**" = ["S101", "F401", "F811"]
+"cli/tests/**" = ["S101", "F401", "F811"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+extend-exclude = '''
+/(
+    node_modules
+  | \.next
+  | \.turbo
+  | cli/venv
+  | packages/hermes-dist/dist
+)/
+'''

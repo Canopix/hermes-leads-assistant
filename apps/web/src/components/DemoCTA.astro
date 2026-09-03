@@ -1,0 +1,46 @@
+---
+import DemoForm from "./DemoForm.astro";
+---
+
+{/* El spec pide FAQ + Formulario lado a lado en una sección única.
+    FAQ.astro ya trae el layout 2-col. Acá armamos el formulario
+    como sección dedicada con su título, en layout 2-col para
+    acompañar visualmente el bloque FAQ que le antecede. */}
+
+<section id="demo" class="border-b border-border bg-background">
+  <div class="container py-32">
+    <div class="grid gap-16 lg:grid-cols-2 lg:gap-24">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-wide text-primary">
+          Pedí tu demo
+        </p>
+        <h2 class="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
+          Miralo funcionando con tus conversaciones
+        </h2>
+        <p class="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground">
+          Una llamada de veinte minutos. Te mostramos cómo responde, califica
+          y ordena oportunidades, y vemos juntos si tiene sentido para tu
+          concesionaria.
+        </p>
+        <ul class="mt-8 space-y-3">
+          <li class="flex items-center gap-3 text-sm">
+            <span class="flex h-5 w-5 flex-none items-center justify-center rounded-full bg-primary text-primary-foreground">
+              ✓
+            </span>
+            <span>Casos reales de concesionarias.</span>
+          </li>
+          <li class="flex items-center gap-3 text-sm">
+            <span class="flex h-5 w-5 flex-none items-center justify-center rounded-full bg-primary text-primary-foreground">
+              ✓
+            </span>
+            <span>Plan y precio claros, sin letra chica.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <DemoForm variant="card" />
+      </div>
+    </div>
+  </div>
+</section>

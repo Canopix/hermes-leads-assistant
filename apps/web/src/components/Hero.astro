@@ -1,0 +1,85 @@
+---
+import Icon from "./Icon.astro";
+import HeroPhone from "./HeroPhone.astro";
+
+const checks = [
+  "Configuración incluida.",
+  "Listo en menos de 48 horas.",
+];
+
+const metricas = [
+  { valor: "24/7", desc: "Disponibilidad" },
+  { valor: "<30s", desc: "Tiempo de respuesta" },
+  { valor: "100%", desc: "Conoce tu stock" },
+  { valor: "0", desc: "Consultas perdidas" },
+];
+---
+
+<section class="border-b border-border">
+  <div class="container py-20 md:py-28">
+    <div class="grid items-center gap-16 lg:grid-cols-2 lg:gap-12">
+      {/* Columna izquierda */}
+      <div>
+        <span class="inline-flex items-center gap-1.5 rounded-button bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+          <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+          Para concesionarias de autos
+        </span>
+
+        <h1 class="mt-6 text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-[64px]">
+          Cada consulta que entra,
+          <br class="hidden sm:block" />
+          <span class="text-primary">es una venta posible</span>.
+        </h1>
+
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+          Un asistente de IA que conversa con cada interesado en WhatsApp,
+          conoce tu inventario y te entrega las oportunidades listas para llamar.
+        </p>
+
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a
+            href="/demo"
+            class="inline-flex h-12 items-center justify-center gap-2 rounded-button bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
+          >
+            Pedir demo
+            <Icon name="arrow-right" size={16} />
+          </a>
+          <a
+            href="#como-funciona"
+            class="inline-flex h-12 items-center justify-center rounded-button border border-border bg-background px-7 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+          >
+            Ver cómo funciona
+          </a>
+        </div>
+
+        <ul class="mt-8 flex flex-col gap-2 text-xs text-muted-foreground sm:flex-row sm:gap-6">
+          {checks.map((c) => (
+            <li class="flex items-center gap-2">
+              <span class="flex h-4 w-4 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                <Icon name="check" size={10} />
+              </span>
+              {c}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Columna derecha: teléfono */}
+      <div class="relative lg:pl-8">
+        <HeroPhone />
+      </div>
+    </div>
+  </div>
+
+  {/* Tarjetas de métricas: fila oscura */}
+  <div class="container pb-20 md:pb-28">
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+      {metricas.map((m) => (
+        <div class="rounded-card bg-foreground p-6 text-white sm:p-7">
+          <p class="text-3xl font-extrabold tracking-tight sm:text-4xl">{m.valor}</p>
+          <p class="mt-1.5 text-xs text-white/60">{m.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

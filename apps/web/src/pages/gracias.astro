@@ -1,0 +1,46 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
+---
+
+<Layout
+  title="¡Gracias! — Hermes Leads"
+  description="Recibimos tu pedido de demo. Te contactamos en menos de 24 horas."
+>
+  <section class="border-b border-border/60">
+    <div class="container py-28 md:py-36">
+      <div class="mx-auto max-w-xl text-center">
+        <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-accent text-accent-foreground">
+          <Icon name="check" size={28} />
+        </div>
+        <h1 class="mt-6 text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Gracias. Recibimos tu pedido
+        </h1>
+        <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
+          Nos escribiste desde una concesionaria de autos, así que ya sabemos
+          por dónde arrancar. Te contactamos en menos de 24 horas hábiles.
+        </p>
+
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a
+            href="/"
+            class="inline-flex h-11 w-full items-center justify-center rounded-md bg-accent px-6 text-sm font-semibold text-accent-foreground shadow-sm transition-colors hover:bg-accent/90 sm:w-auto"
+          >
+            Volver al inicio
+          </a>
+          <a
+            href="mailto:hola@hermesleads.com"
+            class="inline-flex h-11 w-full items-center justify-center rounded-md border border-border bg-card px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted sm:w-auto"
+          >
+            Escribirnos directo
+          </a>
+        </div>
+
+        <p class="mt-8 text-xs text-muted-foreground">
+          ¿Tenés que hacer algo más?
+          <span class="text-foreground">No</span> — ya está. Nosotros te escribimos.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

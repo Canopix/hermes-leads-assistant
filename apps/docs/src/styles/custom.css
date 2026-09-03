@@ -1,0 +1,6 @@
+/* Personalización minimal del tema Starlight. */
+:root {
+  --sl-color-accent: #4f46e5;
+  --sl-color-accent-low: #312c81;
+  --sl-color-accent-high: #c7d2fe;
+}

@@ -1,0 +1,6 @@
+name: lead-capture
+version: 1.0.0
+description: "Extract structured lead data after each turn and persist to SQLite for the Kanban dashboard"
+author: Hermes Leads Assistant
+hooks:
+  - post_llm_call

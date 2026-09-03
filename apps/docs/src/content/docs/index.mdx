@@ -1,0 +1,72 @@
+---
+title: Home
+description: Internal documentation for the Hermes Leads Assistant project.
+template: doc
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+# Hermes Leads Assistant
+
+**Multi-tenant** system for lead management and AI bots. Each client (tenant) has its own isolated bot on Telegram and/or WhatsApp, its own database, and its own knowledge base — all orchestrated on top of [Hermes Agent](https://hermes-agent.dev) and a Next.js web portal.
+
+> This documentation is **internal** and describes how the project works end-to-end: architecture, plugins, portal, operator tooling, data model, runbooks, and design decisions.
+
+<CardGrid stagger>
+  <Card title="Architecture" icon="puzzle">
+    How the components fit together, the end-to-end message flow, and tenant isolation.
+  </Card>
+  <Card title="Hermes plugins" icon="puzzle">
+    The 5 plugins that extend the runtime: scope, rag, capture, documents, dashboard.
+  </Card>
+  <Card title="Web portal" icon="setting">
+    Better Auth, multi-tenancy, API route guards, and the data layer.
+  </Card>
+  <Card title="Operator tooling" icon="rocket">
+    The `leadai` CLI, client provisioning, and VPS deploys.
+  </Card>
+  <Card title="Data model" icon="seti:default">
+    SQLite DBs, versioned migrations, and the Py↔TS contract test.
+  </Card>
+  <Card title="Runbooks" icon="book">
+    Step-by-step recipes: provision, deprovision, debug, back up.
+  </Card>
+  <Card title="Design decisions" icon="clipboard">
+    Why SQLite, why Hermes profiles, why WAL, why contracts.
+  </Card>
+</CardGrid>
+
+## Golden rule
+
+> **Node (`apps/`, `node_modules/`) is never used as the Hermes source.** Runtime profiles live in `~/.hermes/profiles/{slug}-leads/`.
+
+This separation is what lets you update the distribution (in the repo) without touching runtime data (in the user's home).
+
+## Monorepo layout
+
+```
+hermes-leads-assistant/
+├── apps/
+│   ├── portal/              # Next.js web portal (clients + admin)
+│   └── docs/                # This documentation site (Astro Starlight)
+├── packages/
+│   ├── hermes-dist/         # Hermes distribution (plugins + templates)
+│   ├── ops/                 # Operator scripts (provision, wizard, validate)
+│   └── shared/              # Shared TypeScript types + JSON schemas
+├── cli/                     # leadai CLI (Python/Typer)
+├── examples/{slug}/         # Per-client versioned KB (optional)
+├── tenants.json             # Legacy registry (install-time)
+└── deploy.sh                # VPS deploy script
+```
+
+## Quick conventions
+
+| Thing | Convention |
+|---|---|
+| Tenant identity | `slug` (regex `^[a-z0-9-]+$`) |
+| Hermes profile | `{slug}-leads` |
+| Leads DB | `~/.hermes/profiles/{slug}-leads/.lead-capture/leads.db` |
+| Auth/portal DB | `~/.hermes/portal/auth.sqlite` |
+| Knowledge base | `~/.hermes/profiles/{slug}-leads/knowledge/` |
+| Bot persona | `SOUL.md` in the profile |
+| Secrets | `LEADAI_*` environment variables (never argv) |

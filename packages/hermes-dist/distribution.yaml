@@ -1,0 +1,35 @@
+name: hermes-leads-assistant
+version: 1.0.0
+description: "Hermes Leads Assistant — public Telegram bot per client with isolated lead sessions, Mem0 memory, and client RAG"
+hermes_requires: ">=0.12.0"
+author: "Hermes Leads Assistant"
+license: "MIT"
+
+env_requires:
+  - name: TELEGRAM_BOT_TOKEN
+    description: "Telegram bot token for this client's public lead bot"
+    required: true
+  - name: TELEGRAM_ALLOW_ALL_USERS
+    description: "Allow any Telegram user to DM the bot (set to true for public lead capture)"
+    required: true
+    default: "true"
+  - name: MEM0_API_KEY
+    description: "Mem0 Platform API key for per-lead conversational memory"
+    required: true
+  - name: MEM0_AGENT_ID
+    description: "Unique Mem0 agent_id per client (use client slug, e.g. acme-leads)"
+    required: true
+  - name: OPENAI_API_KEY
+    description: "LLM provider API key (or equivalent for your configured provider)"
+    required: false
+    default: ""
+
+distribution_owned:
+  - .no-bundled-skills
+  - SOUL.md
+  - config.yaml
+  - distribution.yaml
+  - requirements.txt
+  - knowledge
+  - plugins
+  - cron

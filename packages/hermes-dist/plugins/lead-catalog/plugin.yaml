@@ -1,0 +1,7 @@
+name: lead-catalog
+version: 1.0.0
+description: "Structured catalog (autos / inmobiliaria) — SQLite inventory + catalog_search/catalog_get tools + RAG export"
+author: Hermes Leads Assistant
+provides_tools:
+  - catalog_search
+  - catalog_get

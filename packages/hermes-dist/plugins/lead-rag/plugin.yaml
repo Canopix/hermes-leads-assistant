@@ -1,0 +1,6 @@
+name: lead-rag
+version: 1.0.0
+description: "Client knowledge RAG — ingest knowledge/, local FTS index, context injection via pre_llm_call"
+author: Hermes Leads Assistant
+hooks:
+  - pre_llm_call

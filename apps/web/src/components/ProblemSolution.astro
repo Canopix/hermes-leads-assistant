@@ -1,0 +1,65 @@
+---
+import Icon from "./Icon.astro";
+
+const problemas = [
+  {
+    titulo: "Las consultas se enfrían",
+    desc: "El 60% de los interesados escribe fuera de horario. A la mañana, ya compró en otro lado.",
+  },
+  {
+    titulo: "Los vendedores no llegan",
+    desc: "Cada vendedor sigue cuatro o cinco conversaciones. Si llegan veinte, la mitad queda sin atender.",
+  },
+  {
+    titulo: "No sabés a quién llamar",
+    desc: "Todo en planilla o cuaderno. Difícil separar al que tiene presupuesto del que solo mira.",
+  },
+];
+---
+
+<section class="border-b border-border bg-background">
+  <div class="container py-32">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-wide text-primary">
+        El problema
+      </p>
+      <h2 class="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
+        Cada consulta fría es una venta perdida
+      </h2>
+      <p class="mt-5 text-lg leading-relaxed text-muted-foreground">
+        Vender un auto lleva varias conversaciones. Si la primera respuesta
+        tarda, el interesado sigue mirando otro lado.
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-5 md:grid-cols-3">
+      {problemas.map((p) => (
+        <div class="rounded-card border border-border bg-background p-8">
+          <p class="text-base font-semibold">{p.titulo}</p>
+          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    {/* Tarjeta destacada */}
+    <div class="mx-auto mt-16 max-w-4xl rounded-card bg-primary-dark p-10 text-center md:p-14">
+      <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-button bg-primary text-primary-foreground">
+        <Icon name="message-circle" size={24} />
+      </div>
+      <h3 class="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+        Un asistente que responde, califica y te entrega la venta
+      </h3>
+      <p class="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-white/70">
+        Conversa con cada interesado, le pregunta lo que un buen vendedor le
+        preguntaría, y te deja la oportunidad clasificada y lista para llamar.
+      </p>
+      <a
+        href="/demo"
+        class="mt-8 inline-flex h-11 items-center justify-center gap-2 rounded-button border border-white/20 bg-white/5 px-6 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+      >
+        Verlo en tu negocio
+        <Icon name="arrow-right" size={16} />
+      </a>
+    </div>
+  </div>
+</section>

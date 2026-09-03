@@ -1,0 +1,6 @@
+name: lead-dashboard
+version: 1.0.0
+description: "Kanban board for captured leads — Frío, Tibio, Caliente with drag and drop"
+author: Hermes Leads Assistant
+hooks:
+  - dashboard

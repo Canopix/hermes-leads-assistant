@@ -1,0 +1,24 @@
+# Python deps for Lead AI Assistant plugins (install into Hermes venv)
+# Used by lead-documents for PDF text extraction.
+pypdf>=4.0,<6
+# Kapso Hermes plugin webhook server
+aiohttp>=3.9,<4
+# Setup wizard (typer + rich + questionary)
+typer>=0.9,<1
+rich>=13.0
+questionary>=2.0,<3
+# Langfuse SDK for bundled observability/langfuse plugin + aux embedding traces.
+# Hermes plugin calls set_trace_io() — requires langfuse >=4.14 (3.x breaks finish).
+# Plugin is fail-open if keys are missing. Local UI: packages/ops/langfuse (:3100).
+langfuse>=4.14,<5
+
+# Optional ANN index for lead-rag (sqlite-vec). NOT installed here by default:
+# this requirements file is pip-installed into the Hermes core venv that is
+# shared across every tenant profile, and polluting it would couple tenant
+# dependencies to Hermes upgrade cycles. To enable ANN search for a tenant:
+#   1. Provision (or migrate) the profile to its own per-profile venv
+#      (the planned Fase 1.1 work in the architecture plan).
+#   2. Then add `sqlite-vec>=0.1.6` to that profile's requirements and
+#      re-ingest the knowledge base.
+# Without sqlite-vec, vector_store.py transparently falls back to the
+# brute-force Python cosine loop, which is fine up to ~2k chunks.

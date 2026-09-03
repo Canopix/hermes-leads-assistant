@@ -1,0 +1,55 @@
+---
+import Layout from "../layouts/Layout.astro";
+import DemoForm from "../components/DemoForm.astro";
+import Icon from "../components/Icon.astro";
+
+const beneficios = [
+  "Te lo mostramos con casos reales de concesionarias.",
+  "Vemos juntos cómo encaja con tu inventario y tu forma de vender.",
+  "Te pasamos un plan y un precio claro, sin letra chica.",
+];
+---
+
+<Layout
+  title="Pedir demo — Hermes Leads"
+  description="Agendá una demo de Hermes Leads para tu concesionaria. Vemos juntos cómo quedaría el asistente calificando oportunidades."
+>
+  <section class="border-b border-border/60">
+    <div class="container py-16 md:py-24">
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <span
+            class="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground"
+          >
+            <Icon name="bot" size={14} />
+            Demo sin compromiso
+          </span>
+          <h1 class="mt-5 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl md:text-5xl">
+            Mirá el asistente funcionando con
+            <span class="text-accent">tus conversaciones reales</span>
+          </h1>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">
+            Una llamada de veinte minutos. Te mostramos cómo responde,
+            califica y ordena oportunidades, y vemos juntos si tiene sentido
+            para tu concesionaria.
+          </p>
+
+          <ul class="mt-8 space-y-3">
+            {beneficios.map((b) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-accent text-accent-foreground">
+                  <Icon name="check" size={12} />
+                </span>
+                <span class="text-sm text-foreground">{b}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <DemoForm variant="card" />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

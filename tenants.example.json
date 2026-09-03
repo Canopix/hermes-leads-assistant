@@ -1,0 +1,14 @@
+{
+  "_comment": "EXAMPLE tenant registry. Copy to tenants.json and edit. Note: in the SaaS build the real tenant list moves into the portal DB (tenants table). This file is kept for single-tenant dev / legacy CLI workflows.",
+  "tenants": [
+    {
+      "slug": "acme",
+      "name": "Acme demo",
+      "hermes_profile": "acme-leads",
+      "status": "active",
+      "channels": ["telegram"],
+      "created_at": "1970-01-01T00:00:00+00:00",
+      "updated_at": "1970-01-01T00:00:00+00:00"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+name: lead-verify
+version: 1.0.0
+description: "Safety net pre-entrega: juez LLM que verifica la respuesta del bot antes de enviarla al usuario"
+author: Hermes Leads Assistant
+hooks:
+  - transform_llm_output

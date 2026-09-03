@@ -1,0 +1,37 @@
+version: 2
+
+updates:
+  # npm (portal + root workspace)
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels: ["dependencies", "npm"]
+    groups:
+      # Batch minor/patch updates so we don't get one PR per dep.
+      react:
+        patterns: ["react", "react-dom", "@types/react", "@types/react-dom"]
+      next:
+        patterns: ["next"]
+      better-auth:
+        patterns: ["better-auth", "better-sqlite3", "@types/better-sqlite3"]
+      dev-tooling:
+        patterns: ["typescript", "vitest", "@vitest/*", "eslint", "prettier"]
+
+  # pip (cli + ops)
+  - package-ecosystem: pip
+    directory: "/cli"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels: ["dependencies", "pip"]
+
+  # github-actions
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    labels: ["dependencies", "ci"]

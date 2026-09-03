@@ -1,0 +1,222 @@
+{
+  "$schema": "lead-ai-internal/v1",
+  "enums": {
+    "column_sources": [
+      "llm",
+      "manual"
+    ],
+    "kanban_columns": [
+      "frio",
+      "tibio",
+      "caliente",
+      "descartado"
+    ],
+    "platforms": [
+      "telegram",
+      "kapso",
+      "web"
+    ],
+    "temperatures": [
+      "frio",
+      "tibio",
+      "caliente"
+    ],
+    "urgencies": [
+      "low",
+      "medium",
+      "high"
+    ]
+  },
+  "tables": {
+    "lead_events": {
+      "columns": [
+        {
+          "autoincrement": true,
+          "name": "id",
+          "nullable": false,
+          "pk": true,
+          "sqlite_type": "INTEGER"
+        },
+        {
+          "fk": "leads(id)",
+          "name": "lead_id",
+          "nullable": false,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "event_type",
+          "nullable": false,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "payload",
+          "nullable": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "created_at",
+          "nullable": false,
+          "sqlite_type": "TEXT"
+        }
+      ],
+      "unique": []
+    },
+    "leads": {
+      "columns": [
+        {
+          "name": "id",
+          "nullable": false,
+          "pk": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "user_id",
+          "nullable": false,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "session_id",
+          "nullable": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "enum": [
+            "telegram",
+            "kapso",
+            "web"
+          ],
+          "name": "platform",
+          "nullable": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "name",
+          "nullable": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "email",
+          "nullable": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "phone",
+          "nullable": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "interest",
+          "nullable": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "default": "'medium'",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "name": "urgency",
+          "nullable": false,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "default": "'tibio'",
+          "enum": [
+            "frio",
+            "tibio",
+            "caliente"
+          ],
+          "name": "temperature",
+          "nullable": false,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "default": "'tibio'",
+          "enum": [
+            "frio",
+            "tibio",
+            "caliente",
+            "descartado"
+          ],
+          "name": "kanban_column",
+          "nullable": false,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "default": "0",
+          "name": "position",
+          "nullable": false,
+          "sqlite_type": "REAL"
+        },
+        {
+          "name": "summary",
+          "nullable": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "notes",
+          "nullable": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "last_user_message",
+          "nullable": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "last_assistant_message",
+          "nullable": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "raw_extraction",
+          "nullable": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "last_extracted_at",
+          "nullable": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "default": "'llm'",
+          "enum": [
+            "llm",
+            "manual"
+          ],
+          "name": "column_source",
+          "nullable": false,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "column_locked_at",
+          "nullable": true,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "default": "0",
+          "name": "manual_override",
+          "nullable": false,
+          "sqlite_type": "INTEGER"
+        },
+        {
+          "name": "created_at",
+          "nullable": false,
+          "sqlite_type": "TEXT"
+        },
+        {
+          "name": "updated_at",
+          "nullable": false,
+          "sqlite_type": "TEXT"
+        }
+      ],
+      "unique": [
+        [
+          "user_id",
+          "platform"
+        ]
+      ]
+    }
+  }
+}

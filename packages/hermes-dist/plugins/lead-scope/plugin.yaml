@@ -1,0 +1,9 @@
+name: lead-scope
+version: 1.0.0
+description: "Lead Assistant guardrails — gateway rate limits, input threat scanning, tool allowlist, Mem0 write protection"
+author: Hermes Leads Assistant
+hooks:
+  - pre_gateway_dispatch
+  - pre_llm_call
+  - pre_api_request
+  - pre_tool_call

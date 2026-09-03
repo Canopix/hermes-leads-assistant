@@ -1,0 +1,14 @@
+{
+  "name": "lead-dashboard",
+  "label": "Leads",
+  "description": "Kanban board for captured leads — Frío, Tibio, Caliente with drag and drop",
+  "icon": "Users",
+  "version": "1.0.0",
+  "tab": {
+    "path": "/leads",
+    "position": "after:sessions"
+  },
+  "entry": "dist/index.js",
+  "css": "dist/style.css",
+  "api": "plugin_api.py"
+}

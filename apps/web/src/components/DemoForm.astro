@@ -1,0 +1,160 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  variant?: "section" | "card";
+}
+
+const { variant = "section" } = Astro.props;
+
+const isSection = variant === "section";
+---
+
+<form
+  id="demo-form"
+  class={isSection
+    ? "mx-auto max-w-xl space-y-5 rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8"
+    : "space-y-5"}
+  data-endpoint="/api/demo-requests"
+>
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div class="space-y-1.5">
+      <label for="name" class="text-sm font-medium">Nombre *</label>
+      <input
+        id="name"
+        name="name"
+        type="text"
+        required
+        autocomplete="name"
+        placeholder="Juan Pérez"
+        class="flex h-10 w-full rounded-md border border-input bg-card px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      />
+    </div>
+    <div class="space-y-1.5">
+      <label for="dealership" class="text-sm font-medium">Concesionaria *</label>
+      <input
+        id="dealership"
+        name="dealership"
+        type="text"
+        required
+        autocomplete="organization"
+        placeholder="Autos del Centro"
+        class="flex h-10 w-full rounded-md border border-input bg-card px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      />
+    </div>
+  </div>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div class="space-y-1.5">
+      <label for="phone" class="text-sm font-medium">WhatsApp *</label>
+      <input
+        id="phone"
+        name="phone"
+        type="tel"
+        required
+        autocomplete="tel"
+        placeholder="+54 9 11 1234-5678"
+        class="flex h-10 w-full rounded-md border border-input bg-card px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      />
+    </div>
+    <div class="space-y-1.5">
+      <label for="volume" class="text-sm font-medium">Autos vendidos por mes</label>
+      <select
+        id="volume"
+        name="volume"
+        class="flex h-10 w-full rounded-md border border-input bg-card px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      >
+        <option value="">Seleccionar…</option>
+        <option value="1-10">1 a 10</option>
+        <option value="11-30">11 a 30</option>
+        <option value="31-60">31 a 60</option>
+        <option value="60+">Más de 60</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="space-y-1.5">
+    <label for="notes" class="text-sm font-medium">¿Algo que contar? (opcional)</label>
+    <textarea
+      id="notes"
+      name="notes"
+      rows="3"
+      placeholder="Qué canal usás hoy, qué problema querés resolver…"
+      class="flex w-full rounded-md border border-input bg-card px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+    ></textarea>
+  </div>
+
+  <div class="flex flex-col gap-3 pt-2">
+    <button
+      type="submit"
+      class="inline-flex h-11 w-full items-center justify-center gap-2 rounded-md bg-accent px-6 text-sm font-semibold text-accent-foreground shadow-sm transition-colors hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60"
+    >
+      <span class="submit-label">Pedir demo</span>
+      <Icon name="arrow-right" size={16} class="submit-icon" />
+      <span class="submit-loading hidden">Enviando…</span>
+    </button>
+    <p class="text-center text-xs text-muted-foreground">
+      Te contactamos en menos de 24 hs hábiles. Sin compromiso.
+    </p>
+    <p
+      class="hidden rounded-md border border-destructive/30 bg-destructive/5 px-3 py-2 text-center text-sm text-destructive"
+      role="alert"
+      data-error
+    >
+    </p>
+  </div>
+</form>
+
+<script>
+  const form = document.getElementById("demo-form") as HTMLFormElement | null;
+  if (form) {
+    const endpoint = form.dataset.endpoint ?? "/api/demo-requests";
+    const submitLabel = form.querySelector<HTMLElement>(".submit-label");
+    const submitIcon = form.querySelector<HTMLElement>(".submit-icon");
+    const submitLoading = form.querySelector<HTMLElement>(".submit-loading");
+    const submitBtn = form.querySelector<HTMLButtonElement>("button[type=submit]");
+    const errorBox = form.querySelector<HTMLElement>("[data-error]");
+
+    const setLoading = (loading: boolean) => {
+      if (!submitBtn) return;
+      submitBtn.disabled = loading;
+      submitLabel?.classList.toggle("hidden", loading);
+      submitIcon?.classList.toggle("hidden", loading);
+      submitLoading?.classList.toggle("hidden", !loading);
+    };
+
+    const showError = (msg: string) => {
+      if (errorBox) {
+        errorBox.textContent = msg;
+        errorBox.classList.remove("hidden");
+      }
+    };
+
+    const clearError = () => {
+      if (errorBox) {
+        errorBox.textContent = "";
+        errorBox.classList.add("hidden");
+      }
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      clearError();
+
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      // Mock temporal: simula un envío exitoso y redirige a /gracias.
+      // Cuando el backend real exista en `endpoint`, se reemplaza este bloque
+      // por el fetch real.
+      setLoading(true);
+      try {
+        await new Promise((r) => setTimeout(r, 700));
+        console.info("[demo-form] mock submit", { endpoint, data });
+        window.location.href = "/gracias";
+      } catch (err) {
+        setLoading(false);
+        showError("No pudimos enviar el formulario. Probá de nuevo o escribinos a hola@hermesleads.com.");
+      }
+    });
+  }
+</script>

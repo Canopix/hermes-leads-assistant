@@ -1,0 +1,16 @@
+{
+  "event": "whatsapp.message.received",
+  "data": {
+    "message": {
+      "id": "wamid.simulate001",
+      "from": "5491112345678",
+      "timestamp": "1710000000",
+      "type": "text",
+      "text": {
+        "body": "¿Cuánto cuesta el plan Pro?"
+      }
+    },
+    "phoneNumberId": "1041695002363992",
+    "conversationId": "conv_simulate001"
+  }
+}

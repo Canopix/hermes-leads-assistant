@@ -1,0 +1,166 @@
+model:
+  default: ""
+  provider: auto
+
+agent:
+  max_turns: 20
+  gateway_timeout: 600
+  tool_use_enforcement: auto
+  task_completion_guidance: true
+  disabled_toolsets:
+    - terminal
+    - file
+    - delegation
+    - cronjob
+    - session_search
+    - browser
+    - code_execution
+    - computer_use
+
+memory:
+  provider: mem0
+  memory_enabled: false
+  user_profile_enabled: false
+  nudge_interval: 0
+
+approvals:
+  mode: smart
+
+sessions:
+  auto_prune: true
+  retention_days: 90
+
+session_reset:
+  mode: idle
+  idle_minutes: 1440
+
+group_sessions_per_user: true
+
+lead_assistant:
+  client_name: "Your Company"
+  business_hours: "09:00-18:00 America/Argentina/Buenos_Aires"
+  max_messages_per_hour: 30
+  max_message_length: 4000
+  allowed_topics:
+    - productos
+    - precios
+    - soporte
+    - consultas
+  owner_telegram_id: ""
+  owner_whatsapp_id: ""
+  classifier_model: ""
+  out_of_hours_message: "Gracias por escribirnos. Estamos fuera de horario. Te responderemos en nuestro próximo horario de atención."
+  rate_limit_message: "Has enviado muchos mensajes. Por favor espera un momento antes de continuar."
+
+lead_capture:
+  enabled: true
+  # 0 = extract every turn. Hermes already debounces inbound bursts.
+  # If set >0, contact signals (phone/email) still bypass the throttle.
+  min_interval_seconds: 0
+  default_column: tibio
+  notify_owner_on_hot: false
+
+  # Per-profile business vertical — appended to lead extractor prompt (see plugins/lead-capture/extractor.py)
+  extraction_hints: ""
+
+lead_verify:
+  enabled: true
+
+lead_documents:
+  enabled: true
+  max_file_mb: 10
+  max_extract_chars: 50000
+  inject_top_k: 3
+  chunk_size: 800
+  chunk_overlap: 100
+
+lead_rag:
+  backend: embeddings
+  top_k: 5
+  min_score: 0.1
+  chunk_size: 800
+  chunk_overlap: 100
+  retrieval_top_k: 20
+  final_top_k: 5
+  hybrid_fts_weight: 0.25
+  rerank_enabled: false
+  embed_batch_size: 16
+
+lead_catalog:
+  # Vertical template for this profile: autos | inmobiliaria
+  # Set at provision; clients do not configure schemas.
+  vertical: autos
+
+gateway:
+  strict: false
+  platforms:
+    telegram:
+      enabled: true
+      gateway_restart_notification: false
+      extra:
+        allow_admin_from: []
+        user_allowed_commands: []
+    # Kapso WhatsApp — enabled by provision-client.sh when KAPSO_API_KEY is set
+    kapso:
+      enabled: false
+      extra: {}
+
+platform_toolsets:
+  telegram:
+    - memory
+  kapso:
+    - memory
+  cli:
+    - memory
+
+plugins:
+  enabled:
+    - lead-scope
+    - lead-rag
+    - lead-capture
+    - lead-documents
+    - lead-verify
+    - memory/mem0
+    # Bundled Hermes plugin — fail-open without HERMES_LANGFUSE_* keys.
+    # Local stack: packages/ops/langfuse (http://localhost:3100).
+    - observability/langfuse
+
+auxiliary:
+  # qwen3.6-on-nan is a thinking model: without this, aux tasks can burn
+  # max_tokens on reasoning_content and leave content empty (30–90s stalls).
+  # New tenants inherit this from hermes-dist; provision also enforces it.
+  lead_extractor:
+    provider: auto
+    model: ""
+    timeout: 30
+    extra_body:
+      enable_thinking: false
+      chat_template_kwargs:
+        enable_thinking: false
+  lead_classifier:
+    provider: auto
+    model: ""
+    timeout: 20
+    extra_body:
+      enable_thinking: false
+      chat_template_kwargs:
+        enable_thinking: false
+  lead_verifier:
+    provider: auto
+    model: ""
+    timeout: 20
+    extra_body:
+      enable_thinking: false
+      chat_template_kwargs:
+        enable_thinking: false
+  embeddings:
+    provider: custom
+    model: ""
+    base_url: ""
+    api_key: ""
+    timeout: 60
+  reranker:
+    provider: custom
+    model: ""
+    base_url: ""
+    timeout: 30

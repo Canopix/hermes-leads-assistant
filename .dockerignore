@@ -1,0 +1,60 @@
+# Build artifacts & caches
+.next/
+out/
+dist/
+build/
+.turbo/
+.cache/
+
+# Dependencies (will be installed inside the image)
+node_modules/
+**/node_modules/
+
+# Env / secrets — never bake into an image
+.env
+.env.*
+**/.env
+**/.env.local
+**/.env.*.local
+
+# Hermes runtime (per-profile, mounted at runtime, not part of the image)
+.hermes/
+**/.hermes/
+
+# Python venvs
+.venv/
+venv/
+cli/venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+
+# Logs
+*.log
+logs/
+
+# Test artifacts
+coverage/
+*.lcov
+.nyc_output/
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Misc
+.git/
+.gitignore
+README.md
+*.md
+!packages/shared/README.md
+tests/
+**/tests/
+.github/
+.cursor/
+.agents/
+.codegraph/
+pytest_cache/
+**/.pytest_cache/

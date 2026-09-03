@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Paleta "Enterprise" — ver AGENTS.md Design Context.
+       Tokens exactos del spec (HEX -> HSL). */
+    --background: 0 0% 100%;            /* #FFFFFF — blanco puro */
+    --foreground: 222 18% 11%;          /* #111827 — negro casi absoluto */
+    --card: 0 0% 100%;                  /* #FFFFFF */
+    --card-foreground: 222 18% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 18% 11%;
+    --primary: 221 83% 53%;             /* #2563EB — azul intenso (CTAs) */
+    --primary-foreground: 0 0% 100%;    /* blanco sobre azul intenso */
+    --primary-dark: 224 67% 33%;        /* #1E3A8A — azul oscuro (apoyo) */
+    --secondary: 210 40% 96%;           /* gris muy claro */
+    --secondary-foreground: 222 18% 11%;
+    --muted: 220 20% 97%;               /* #F8F9FB — fondo secundario */
+    --muted-foreground: 220 9% 46%;     /* #6B7280 — gris medio (body 2do) */
+    --accent: 221 83% 53%;              /* = primary, el azul es el único acento */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;              /* #E5E7EB — bordes muy suaves */
+    --input: 220 13% 91%;
+    --ring: 221 83% 53%;                /* focus state = azul intenso */
+    --radius: 0.75rem;                  /* 12px base */
+
+    /* Radios específicos del spec */
+    --radius-card: 0.875rem;            /* 14px — tarjetas */
+    --radius-button: 0.75rem;           /* 12px — botones */
+
+    /* Sombras extremadamente sutiles */
+    --shadow-xs: 0 1px 2px 0 rgb(17 24 39 / 0.03);
+    --shadow-sm: 0 1px 3px 0 rgb(17 24 39 / 0.04), 0 1px 2px -1px rgb(17 24 39 / 0.03);
+    --shadow-md: 0 4px 6px -1px rgb(17 24 39 / 0.05), 0 2px 4px -2px rgb(17 24 39 / 0.03);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    letter-spacing: -0.011em;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  /* Jerarquía de títulos: muy grandes, muy pesados */
+  h1, h2, h3 {
+    letter-spacing: -0.025em;
+  }
+}

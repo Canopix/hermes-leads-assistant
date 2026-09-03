@@ -1,0 +1,50 @@
+---
+import Icon from "./Icon.astro";
+
+const links = [
+  { href: "#como-funciona", label: "Cómo funciona" },
+  { href: "#features", label: "Funcionalidades" },
+  { href: "#faq", label: "Preguntas" },
+  { href: "/demo", label: "Contacto" },
+];
+---
+
+<header class="sticky top-0 z-50 w-full h-20 border-b border-border bg-background/80 backdrop-blur-md">
+  <div class="container flex h-full items-center justify-between">
+    {/* Izquierda: logo */}
+    <a href="/" class="flex flex-none items-center gap-2 font-semibold">
+      <span class="flex h-8 w-8 items-center justify-center rounded-button bg-primary text-primary-foreground">
+        <Icon name="sparkles" size={16} />
+      </span>
+      <span class="text-[15px] tracking-tight">Hermes Leads</span>
+    </a>
+
+    {/* Centro: links */}
+    <nav class="hidden items-center gap-8 lg:flex">
+      {links.map((l) => (
+        <a
+          href={l.href}
+          class="text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          {l.label}
+        </a>
+      ))}
+    </nav>
+
+    {/* Derecha: actions */}
+    <div class="flex flex-none items-center gap-3">
+      <a
+        href="https://app.hermesleads.com/login"
+        class="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:inline"
+      >
+        Iniciar sesión
+      </a>
+      <a
+        href="/demo"
+        class="inline-flex h-10 items-center justify-center rounded-button bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
+      >
+        Pedir demo
+      </a>
+    </div>
+  </div>
+</header>

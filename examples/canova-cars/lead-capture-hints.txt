@@ -1,0 +1,14 @@
+Rubro: agencia de concesionario de automóviles nuevos y seminuevos.
+El cliente ya contacta por este chat (Telegram/WhatsApp); no hace falta email/teléfono salvo que lo ofrezca para otro medio.
+
+Campos adicionales en el JSON (string, vacío si no hay dato):
+- vehicle_interest: marca, modelo o versión que busca el cliente (ej. "Toyota Corolla Cross", "camioneta 4x4", "SUV familiar")
+- budget: presupuesto o rango mencionado (ej. "$30 millones", "hasta 40k USD", "no definido")
+- payment_method: forma de pago preferida (ej. "financiación", "contado", "tarjeta", "plan de ahorro")
+- urgency: cuándo necesita el auto (ej. "ya", "para septiembre", "estoy comparando")
+- buyer_type: tipo de compra (ej. "primer auto", "familiar", "reemplazo", "inversión")
+
+El summary debe incluir nombre (si hay), vehicle_interest, budget y urgency cuando figuren en cualquier mensaje del historial.
+Revisá todo el historial antes de inferir el vehículo — no uses solo el último mensaje.
+
+El bot no cotiza precios finales: en interest/summary dejá claro qué debe personalizar el asesor humano (ej. "cotización del Corolla Cross 0km con financiación", "evaluación de la S10 seminueva").

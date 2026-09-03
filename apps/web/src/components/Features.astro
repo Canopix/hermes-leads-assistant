@@ -1,0 +1,66 @@
+---
+import Icon from "./Icon.astro";
+
+const features = [
+  {
+    icon: "bot" as const,
+    titulo: "Captura cada oportunidad",
+    desc: "Conversa con cada interesado y saca nombre, teléfono, qué busca, presupuesto y cuándo lo necesita. Nada se anota a mano.",
+  },
+  {
+    icon: "brain" as const,
+    titulo: "Conoce tu stock",
+    desc: "Cargás tu inventario y responde sobre modelos, precios, ficha técnica y disponibilidad en segundos.",
+  },
+  {
+    icon: "target" as const,
+    titulo: "Te dice a quién llamar",
+    desc: "Cada conversación queda Fría, Tibia o Caliente. Entrás al portal y llamás al más listo primero.",
+  },
+  {
+    icon: "message-circle" as const,
+    titulo: "WhatsApp y Telegram",
+    desc: "Lo conectamos a los canales donde tus clientes ya escriben. Mismo flujo, sin cambiar nada.",
+  },
+  {
+    icon: "clock" as const,
+    titulo: "Responde a toda hora",
+    desc: "De noche, fines de semana y feriados. No se enferma ni se va de vacaciones.",
+  },
+  {
+    icon: "shield" as const,
+    titulo: "Tu información es tuya",
+    desc: "Cada concesionaria tiene su propio asistente, inventario y base. Nada se mezcla.",
+  },
+];
+---
+
+<!-- Sección Features: la ÚNICA excepción oscura del sitio. -->
+<section id="features" class="bg-primary-dark text-white">
+  <div class="container py-32">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-wide text-primary">
+        Funcionalidades
+      </p>
+      <h2 class="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
+        Todo lo que necesitás para no perder otra venta
+      </h2>
+      <p class="mt-5 text-lg leading-relaxed text-white/60">
+        Pensado para el día a día de una concesionaria. No es un chatbot
+        genérico.
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {features.map((f) => (
+        <div class="rounded-card border border-white/10 bg-white/[0.03] p-8 transition-colors hover:bg-white/[0.06]">
+          <div class="flex h-11 w-11 items-center justify-center rounded-button bg-primary text-primary-foreground">
+            <Icon name={f.icon} size={22} />
+          </div>
+          <h3 class="mt-5 text-base font-semibold">{f.titulo}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-white/60">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

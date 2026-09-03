@@ -1,0 +1,4 @@
+name: lead-documents
+version: 1.0.0
+description: Per-lead document ingestion (PDF, DOCX, text) and FTS retrieval
+author: Hermes Leads Assistant

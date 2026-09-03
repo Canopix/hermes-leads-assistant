@@ -19,7 +19,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from collections import OrderedDict
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 BASE = "https://api.acara.org.ar/api/v1"
@@ -131,7 +131,7 @@ def save_payload(out_path: Path, brands_out: list[dict], partial: bool = False) 
         "source": "acara",
         "vehicle_type": "autos",
         "vehicle_type_id": VEHICLE_TYPE,
-        "synced_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "synced_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "partial": partial,
         "counts": {
             "brands": len(brands_out),

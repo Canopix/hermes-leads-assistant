@@ -13,7 +13,7 @@ pnpm audit --prod || echo "[warn] pnpm audit reported issues; review above."
 
 if command -v pip-audit >/dev/null 2>&1; then
   echo "==> pip-audit (Hermes venv)"
-  HERMES_VENV="${HERMES_VENV:-$(ls -d ~/.hermes/profiles/*-leads/venv 2>/dev/null | head -1)}"
+  HERMES_VENV="${HERMES_VENV:-$(find ~/.hermes/profiles -maxdepth 2 -path '*-leads/venv' -type d 2>/dev/null | head -1)}"
   if [[ -n "$HERMES_VENV" ]]; then
     "$HERMES_VENV/bin/pip-audit" --strict || echo "[warn] pip-audit reported issues; review above."
   else

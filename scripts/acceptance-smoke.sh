@@ -75,7 +75,7 @@ PORTAL_PID=$!
 cd - >/dev/null
 
 # Wait for the server to come up.
-for i in $(seq 1 30); do
+for _ in $(seq 1 30); do
   if curl -sf -o /dev/null "$BASE/api/health"; then break; fi
   sleep 1
 done
@@ -87,6 +87,7 @@ if ! curl -sf -o /dev/null "$BASE/api/health"; then
 fi
 info "Portal up (pid $PORTAL_PID)."
 
+# shellcheck disable=SC2329  # invoked via trap below
 cleanup() {
   info "Shutting down portal (pid $PORTAL_PID)"
   kill "$PORTAL_PID" 2>/dev/null || true

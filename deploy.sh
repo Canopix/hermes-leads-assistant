@@ -42,7 +42,7 @@ if [[ -z "$DOMAIN" ]]; then
 fi
 
 : "${LEADAI_REPO_URL:?Set LEADAI_REPO_URL to the git clone URL of the hermes-leads-assistant repo}"
-: "${LEADAI_ADMIN_EMAIL:?Set LEADAI_ADMIN_EMAIL for Let's Encrypt notifications}"
+: "${LEADAI_ADMIN_EMAIL:?Set LEADAI_ADMIN_EMAIL for TLS certificate notifications}"
 
 HERMES_INSTALL_URL="${HERMES_INSTALL_URL:-https://raw.githubusercontent.com/NousResearch/hermes-agent/main/install.sh}"
 KAPSO_INGRESS="${KAPSO_INGRESS:-on}"
@@ -95,10 +95,10 @@ if [[ ! -d "$HERMES_HOME" ]]; then
   # The official installer is idempotent and creates the user/local dirs.
   # We run it as the app user so profiles live under their home.
   install -d -o "$HERMES_USER" -g "$HERMES_USER" "$(getent passwd "$HERMES_USER" | cut -d: -f6)"
-  sudo -u "$HERMES_USER" bash -c '
+  sudo -u "$HERMES_USER" env HERMES_INSTALL_URL="$HERMES_INSTALL_URL" bash -c '
     set -e
     if ! command -v hermes >/dev/null 2>&1; then
-      curl -fsSL "'"$HERMES_INSTALL_URL"'" | bash
+      curl -fsSL "$HERMES_INSTALL_URL" | bash
     fi
   ' || warn "Hermes installer exited non-zero. Install Hermes manually before provisioning tenants."
 else

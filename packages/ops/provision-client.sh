@@ -329,6 +329,7 @@ if [[ "$DRY_RUN" != true && -f "${PROFILE_DIR}/config.yaml" ]]; then
     # Substitute the literal value, if present, with an env reference.
     # Idempotent: safe to run on already-substituted configs.
     if grep -q "model:" "${PROFILE_DIR}/config.yaml" 2>/dev/null; then
+      # shellcheck disable=SC2016  # ${OPENAI_API_KEY} must stay literal: Hermes expands env refs at runtime
       sed -i.bak 's|api_key: .*[a-zA-Z0-9_-]\{20,\}.*|api_key: ${OPENAI_API_KEY}|' "${PROFILE_DIR}/config.yaml" 2>/dev/null || true
       rm -f "${PROFILE_DIR}/config.yaml.bak"
     fi
@@ -601,6 +602,9 @@ else
 fi
 
 # 8. RAG ingest
+if [[ "$REINGEST" == true ]]; then
+  echo "==> RAG re-ingest forced by --reingest"
+fi
 echo "==> Ingesting knowledge base"
 run hermes -p "$PROFILE" lead-rag ingest 2>/dev/null || {
   # Direct ingest via plugin module (load submodules for relative imports)
